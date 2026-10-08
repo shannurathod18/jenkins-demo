@@ -3,24 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building application'
-                sh 'cat app.txt'
+                echo 'Code is already checked out by Jenkins'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Running tests'
-                sh 'echo Tests completed successfully'
+                sh 'docker build -t jenkins-demo .'
             }
         }
 
-        stage('Deploy') {
+        stage('Run Docker Container') {
             steps {
-                echo 'Deploying application'
-                sh 'echo Application deployed successfully'
+                sh 'docker run --rm jenkins-demo'
             }
         }
 
